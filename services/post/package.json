@@ -1,0 +1,19 @@
+{
+  "name": "post-service",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "ts-node-dev --respawn index.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.12.2",
+    "dotenv": "^16.3.1",
+    "express": "^5.1.0",
+    "mongoose": "^7.6.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node14": "^14.1.4",
+    "@types/node": "^24.0.14",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.0"
+  }
+}
