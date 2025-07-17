@@ -19,4 +19,6 @@ app.post("/users", async (req, res) => {
   res.json(user);
 });
 
-app.listen(4006, () => console.log("User service listening on port 4006"));
+app.listen(4006, "0.0.0.0", () => {
+  console.log("User service running on port 4006");
+});
