@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
+import typeDefs from "./typeDefs";
 
 const app = express();
 
@@ -15,34 +16,19 @@ app.use(
 
 app.use(express.json());
 
-const typeDefs = `#graphql
-  type User {
-    id: Int
-    username: String
-    email: String
-  }
-
-  type Mutation {
-    createUser(username: String!, email: String!, password: String!): User
-  }
-
-  type Query {
-    hello: String
-  }
-`;
-
 let nextId = 1;
-const users: any[] = [];
+const posts: any[] = [];
 
 const resolvers = {
   Query: {
     hello: () => "Hello!",
+    posts: () => posts,
   },
   Mutation: {
-    createUser: (_: any, { username, email, password }: any) => {
-      const user = { id: nextId++, username, email };
-      users.push(user);
-      return user;
+    createPost: (_: any, { title, content, authorId }: any) => {
+      const post = { title, content, authorId }; // Include authorId!
+      posts.push(post);
+      return post;
     },
   },
 };

@@ -123,16 +123,6 @@ services:
     networks: [app-network]
     ports:
       - "4000:4000"
-  # frontend:
-  #   build: ./frontend
-  #   ports:
-  #     - "3000:3000"
-  #   env_file: .env
-  #   networks: [app-network]
-  #   depends_on:
-  #     - reverse-proxy
-  #   environment:
-  #     - NEXT_PUBLIC_API_BASE=http://reverse-proxy
 
   reverse-proxy:
     image: nginx:stable
@@ -148,6 +138,17 @@ services:
       - messaging
       - search
     networks: [app-network]
+
+    # frontend:
+    #   build: ./frontend
+    #   ports:
+    #     - "3000:3000"
+    #   env_file: .env
+    #   networks: [app-network]
+    #   depends_on:
+    #     - reverse-proxy
+    #   environment:
+    #     - NEXT_PUBLIC_API_BASE=http://reverse-proxy
 
 networks:
   app-network:

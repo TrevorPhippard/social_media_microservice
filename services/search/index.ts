@@ -52,5 +52,5 @@ app.get(
 );
 
 app.listen(4005, "0.0.0.0", () => {
-  console.log("User service running on port 4006");
+  console.log("User service running on port 4005");
 });

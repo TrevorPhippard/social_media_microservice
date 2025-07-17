@@ -4,38 +4,25 @@
     <input v-model="email" type="email" placeholder="Email" class="input" />
     <input v-model="password" type="password" placeholder="Password" class="input" />
     <button type="submit" class="btn">Register</button>
-    <p v-if="error" class="text-red-500">Error: {{ error.message }}</p>
+    <!-- <p v-if="error" class="text-red-500">Error: {{ error.message }}</p> -->
   </form>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import { useMutation } from "@vue/apollo-composable";
-import { REGISTER_MUTATION } from "@/graphql/auth";
+import { ref } from "vue";
 
 const username = ref("");
 const email = ref("");
 const password = ref("");
-const { mutate: register, error, onDone } = useMutation(REGISTER_MUTATION);
 
 function handleRegister() {
-  register({
+  console.log({
     username: username.value,
     email: email.value,
     password: password.value,
   });
 }
 
-watch(error, (e) => {
-  if (e) {
-    console.error("Registration error:", e);
-  }
-});
-
-onDone(({ data }) => {
-  console.log("Registered user:", data?.createUser);
-  // Optional: redirect or clear form here
-});
 </script>
 
 <style scoped>
