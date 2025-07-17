@@ -71,6 +71,11 @@ services:
     networks: [app-network]
     ports:
       - "4006:4006"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4006/users"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   post:
     build: ./services/post

@@ -9,31 +9,47 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useMutation } from '@vue/apollo-composable'
-import { REGISTER_MUTATION } from '@/graphql/auth'
+import { ref, watch } from "vue";
+import { useMutation } from "@vue/apollo-composable";
+import { REGISTER_MUTATION } from "@/graphql/auth";
 
-const username = ref('')
-const email = ref('')
-const password = ref('')
-
-const { mutate: register, error, onDone } = useMutation(REGISTER_MUTATION)
+const username = ref("");
+const email = ref("");
+const password = ref("");
+const { mutate: register, error, onDone } = useMutation(REGISTER_MUTATION);
 
 function handleRegister() {
-  register({ username: username.value, email: email.value, password: password.value })
+  register({
+    username: username.value,
+    email: email.value,
+    password: password.value,
+  });
 }
 
+watch(error, (e) => {
+  if (e) {
+    console.error("Registration error:", e);
+  }
+});
+
 onDone(({ data }) => {
-  console.log('Registered:', data?.register)
-  // Optional: redirect to login
-})
+  console.log("Registered user:", data?.createUser);
+  // Optional: redirect or clear form here
+});
 </script>
 
 <style scoped>
 .input {
-  @apply border rounded p-2 w-full;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 4px;
 }
 .btn {
-  @apply bg-blue-600 text-white px-4 py-2 rounded;
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
 }
 </style>

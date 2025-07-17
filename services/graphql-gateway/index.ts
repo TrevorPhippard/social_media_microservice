@@ -1,44 +1,62 @@
+import express from "express";
+import cors from "cors";
 import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-import fetch from "node-fetch";
+import { expressMiddleware } from "@apollo/server/express4";
+
+const app = express();
+
+// 👇️ CORS middleware MUST come before anything else
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Frontend origin
+    credentials: true,
+  })
+);
+
+app.use(express.json());
 
 const typeDefs = `#graphql
   type User {
     id: Int
-    name: String
+    username: String
     email: String
   }
 
-  type Post {
-    _id: ID
-    title: String
-    content: String
-    authorId: Int
+  type Mutation {
+    createUser(username: String!, email: String!, password: String!): User
   }
 
   type Query {
-    users: [User]
-    posts: [Post]
+    hello: String
   }
 `;
 
+let nextId = 1;
+const users: any[] = [];
+
 const resolvers = {
   Query: {
-    users: async () => {
-      const res = await fetch("http://user-service:4006/users");
-      return res.json();
-    },
-    posts: async () => {
-      const res = await fetch("http://post-service:4002/posts");
-      return res.json();
+    hello: () => "Hello!",
+  },
+  Mutation: {
+    createUser: (_: any, { username, email, password }: any) => {
+      const user = { id: nextId++, username, email };
+      users.push(user);
+      return user;
     },
   },
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
+async function startServer() {
+  const server = new ApolloServer({ typeDefs, resolvers });
+  await server.start();
 
-startStandaloneServer(server, {
-  listen: { port: 4000 },
-}).then(() => {
-  console.log("🚀 GraphQL service ready at http://localhost:4000/graphql");
-});
+  // 👇️ Apollo middleware added AFTER cors/json
+  app.use("/graphql", expressMiddleware(server));
+
+  app.listen(4000, () => {
+    console.log("🚀 Server running on http://localhost:4000/graphql");
+  });
+}
+
+startServer();

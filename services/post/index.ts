@@ -29,4 +29,6 @@ app.post("/posts", async (req, res) => {
   res.json(post);
 });
 
-app.listen(4002, () => console.log("Post service listening on port 4002"));
+app.listen(4002, "0.0.0.0", () => {
+  console.log("User service running on port 4006");
+});
