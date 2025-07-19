@@ -63,15 +63,11 @@ services:
     env_file: .env
     environment:
       DATABASE_URL: ${PROFILE_DATABASE_URL}
+      PORT: 4002
     depends_on: [profile-db]
     networks: [app-network]
     ports:
       - "4002:4002"
-    healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:4002/health"]
-        interval: 10s
-        timeout: 5s
-        retries: 5
 
   pgadmin:
     image: dpage/pgadmin4
@@ -93,16 +89,15 @@ services:
     networks: [app-network]
     ports:
       - "4001:4001"
-    healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:4001/health"]
-        interval: 10s
-        timeout: 5s
-        retries: 5
 
   graphql-gateway:
     build: ./graphql-gateway
     depends_on: [profile, post]
     networks: [app-network]
+    environment:
+      POST_SERVICE_URL: ${POST_SERVICE_URL}
+      PROFILE_SERVICE_URL: ${PROFILE_SERVICE_URL}
+      SEARCH_SERVICE_URL: ${SEARCH_SERVICE_URL}
     ports:
       - "4000:4000"
 
@@ -124,6 +119,7 @@ services:
 
 networks:
   app-network:
+    driver: bridge
 
 volumes:
   auth_data:
