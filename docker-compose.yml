@@ -80,6 +80,7 @@ services:
     depends_on: [auth-db, profile-db]
     networks: [app-network]
     volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro  # pre-load servers
       - pgadmin_data:/var/lib/pgadmin
 
   post:
