@@ -1,5 +1,3 @@
-# ports
-
 # Social Media Microservices App
 
 A scalable, production-ready social media application built using Node.js microservices and a Vue.js frontend. It features a GraphQL API gateway, real-time messaging, full-text search, JWT authentication, and observability integrations via Prometheus and OpenTelemetry.
