@@ -1,12 +1,19 @@
-FROM node:18-bullseye
+#syntax=docker/dockerfile:1
 
-WORKDIR /app
+FROM node:18-bullseye:18-bullseye
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
+# Set environment variable
+ENV NODE_ENV=development
 
-# Copy source code and Prisma schema
+# Set working directory
+WORKDIR /usr/src/app
+
+# Install dependencies using cache and bind mount (requires BuildKit)
+RUN --mount=type=bind,source=package.json,target=package.json \
+  --mount=type=bind,source=package-lock.json,target=package-lock.json \
+  --mount=type=cache,target=/root/.npm \
+  npm ci --include=dev
+
 COPY . .
 
 # Generate Prisma client (important)
@@ -15,6 +22,7 @@ RUN npx prisma generate
 # Compile TypeScript to JavaScript (creates dist/)
 RUN npm run build
 
+# Expose port used by the app
 EXPOSE 4003
 
 # Push Prisma schema to database and start the built app

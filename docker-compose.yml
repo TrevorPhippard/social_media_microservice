@@ -183,7 +183,7 @@ volumes:
   #   depends_on: [kafka]
   #   networks: [app-network]
   #   ports:
-  #     - "4003:4003"
+  #     - "4006:4006"
 
   # messaging:
   #   build: ./services/messaging
