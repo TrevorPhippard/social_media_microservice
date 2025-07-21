@@ -1,0 +1,22 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "auth-db",
+      "Group": "Postgres Servers",
+      "Host": "auth-db",
+      "Port": 5432,
+      "Username": "auth_user",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "auth_db"
+    },
+    "2": {
+      "Name": "profile-db",
+      "Group": "Postgres Servers",
+      "Host": "profile-db",
+      "Port": 5432,
+      "Username": "profile_user",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "profile_db"
+    }
+  }
+}

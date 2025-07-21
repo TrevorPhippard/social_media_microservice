@@ -55,10 +55,17 @@ Other Services:
    docker-compose up --build
    ```
 
+2.5. *Run a service:**
+
+   ```bash
+   docker run --interactive --tty
+   ```
+
 3. **Access services:**
    - Frontend: <http://localhost:3000>
    - GraphQL Gateway: <http://localhost:4000/graphql>
    - Prometheus: <http://localhost:9090>
+   - pgadmin: <http://localhost:8080/login?next=/browser/>
 
 ---
 
@@ -80,6 +87,37 @@ social-media-app/
 ├── proto/               # gRPC Protobuf files
 ├── monitoring/          # Prometheus & OpenTelemetry config
 └── frontend/            # Vue 3 SPA
+```
+
+## Front-end Structure
+
+```
+frontend/
+├── public/                  # Static assets (favicon, robots.txt, etc.)
+├── src/
+│   ├── assets/              # Images, fonts, etc.
+│   ├── components/          # Global reusable UI components
+│   ├── composables/         # Custom Composition API logic (useAuth, useForm, etc.)
+│   ├── layouts/             # App layouts (default, auth, dashboard)
+│   ├── pages/               # Route components (auto-routed if using unplugin-vue-router)
+│   ├── router/              # Vue Router setup
+│   │   └── index.ts
+│   ├── stores/              # Pinia stores
+│   │   └── user.ts
+│   ├── types/               # Global TypeScript types/interfaces
+│   ├── utils/               # Helpers, formatters, validators
+│   ├── services/            # API calls (axios/fetch clients)
+│   ├── plugins/             # Plugin registration (e.g., axios, i18n)
+│   ├── styles/              # Global CSS/SCSS files
+│   │   └── main.scss
+│   ├── App.vue              # Root component
+│   └── main.ts              # App entry point
+├── .env                    # Environment variables
+├── index.html              # Vite HTML template
+├── vite.config.ts          # Vite configuration
+├── tsconfig.json           # TypeScript config
+└── package.json
+
 ```
 
 ---
@@ -122,8 +160,3 @@ social-media-app/
 - Local services can be run individually with `npm run dev`
 - Unit tests are scaffolded per service (coming soon)
 - Mock services/stubs for integration test pipelines (planned)
-
-## Endpoints
-
-<http://localhost:4000/graphql>
-<http://localhost:8080/login?next=/browser/>
