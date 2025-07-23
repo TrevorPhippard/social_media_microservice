@@ -67,6 +67,11 @@ Other Services:
    - Prometheus: <http://localhost:9090>
    - pgadmin: <http://localhost:8080/login?next=/browser/>
 
+3.1 **reading database contents**
+ docker exec -it auth-db psql -U auth_user -d auth_db
+\dt
+SELECT * FROM User
+
 ---
 
 ## 📁 Project Structure

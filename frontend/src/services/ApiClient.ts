@@ -19,12 +19,13 @@ export class ApiClient {
       ...(options.headers || {}),
     }
 
-    const response = await this.withRetry(() =>
-      fetch(`${this.baseUrl}${path}`, {
+    const response = await this.withRetry(() => {
+      console.log(this.baseUrl)
+      return fetch(`${this.baseUrl}${path}`, {
         ...options,
         headers,
-      }),
-    )
+      })
+    })
 
     if (!response.ok) {
       const text = await response.text()

@@ -1,6 +1,6 @@
 #syntax=docker/dockerfile:1
 
-FROM node:18-bullseye:18-bullseye
+FROM node:18-bullseye
 
 # Set environment variable
 ENV NODE_ENV=development

@@ -9,6 +9,8 @@ export class UserService {
   }
 
   async login(payload: LoginPayload): Promise<User> {
+    console.log('http://localhost:4003/')
+
     return this.api.post<User>('/api/auth/login', payload)
   }
 

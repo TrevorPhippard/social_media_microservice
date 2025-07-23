@@ -5,9 +5,8 @@ import { ApiClient } from '@/services/ApiClient'
 import type { User, RegisterPayload } from '@/types'
 
 // Initialize services outside the store
-const apiClient = new ApiClient(import.meta.env.VITE_API_BASE_URL, () =>
-  localStorage.getItem('token'),
-)
+//import.meta.env.VITE_API_BASE_URL
+const apiClient = new ApiClient('http://localhost:4003', () => localStorage.getItem('token'))
 const authService = new AuthService(apiClient)
 
 export const useAuthStore = defineStore('auth', () => {
