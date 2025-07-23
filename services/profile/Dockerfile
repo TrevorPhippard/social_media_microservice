@@ -10,6 +10,10 @@ ENV NODE_ENV=development
 WORKDIR /usr/src/app
 
 # Install dependencies using cache and bind mount (requires BuildKit)
+RUN --mount=type=bind,source=package.json,target=package.json \
+  --mount=type=bind,source=package-lock.json,target=package-lock.json \
+  --mount=type=cache,target=/root/.npm \
+  npm ci --include=dev
 
 # Copy source code and Prisma schema
 COPY . .
