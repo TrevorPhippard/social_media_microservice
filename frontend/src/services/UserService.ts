@@ -8,31 +8,31 @@ export class UserService {
     this.api = apiClient
   }
 
-  login(payload: LoginPayload): Promise<User> {
+  async login(payload: LoginPayload): Promise<User> {
     return this.api.post<User>('/api/auth/login', payload)
   }
 
-  register(payload: RegisterPayload): Promise<User> {
+  async register(payload: RegisterPayload): Promise<User> {
     return this.api.post<User>('/api/auth/register', payload)
   }
 
-  getProfile(userId: number): Promise<User> {
-    return this.api.get<User>(`/api/users/${userId}`)
+  async getUserById(userId: number): Promise<User[]> {
+    return this.api.get<User[]>(`/api/users/${userId}`)
   }
 
-  getFollowers(userId: number): Promise<User[]> {
+  async follow(userId: number): Promise<void> {
+    this.api.post<User>(`/api/users/${userId}/follow`, {})
+  }
+
+  async unfollow(userId: number): Promise<void> {
+    this.api.post<User>(`/api/users/${userId}/unfollow`, {})
+  }
+
+  async getFollowers(userId: number): Promise<User[]> {
     return this.api.get<User[]>(`/api/users/${userId}/followers`)
   }
 
-  getFollowing(userId: number): Promise<User[]> {
+  async getFollowing(userId: number): Promise<User[]> {
     return this.api.get<User[]>(`/api/users/${userId}/following`)
-  }
-
-  follow(userId: number): Promise<void> {
-    return this.api.post<void>(`/api/users/${userId}/follow`, {})
-  }
-
-  unfollow(userId: number): Promise<void> {
-    return this.api.post<void>(`/api/users/${userId}/unfollow`, {})
   }
 }

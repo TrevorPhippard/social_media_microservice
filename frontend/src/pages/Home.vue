@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts">
-// import { useUserStore } from '@/stores/auth'
+// import { useAuthStore } from '@/stores/auth'
 import PostFeed from '@/components/post/PostFeed.vue'
 
-// const userStore = useUserStore()
+// const userStore = useAuthStore()
 // const user = userStore.user
 </script>

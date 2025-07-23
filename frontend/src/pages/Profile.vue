@@ -7,17 +7,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useUserStore } from '@/stores/userStore'
 import PostFeed from '@/components/post/PostFeed.vue'
 // import FollowButton from '@/components/user/FollowButton.vue'
-import type { User } from '@/types'
 
 const route = useRoute()
 const userId = Number(route.params.id)
-const user = ref<User | null>(null)
+const userStore = useUserStore()
 
-onMounted(async () => {
-  user.value = await fetch(`/api/users/${userId}`).then(res => res.json())
+onMounted(() => {
+  userStore.loadUser(userId)
 })
+
+const user = computed(() => userStore.getUser(userId))
 </script>

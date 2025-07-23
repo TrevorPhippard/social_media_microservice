@@ -1,10 +1,13 @@
 <template>
   <div class="comments">
     <div v-for="comment in comments" :key="comment.id" class="comment">
-      <p><strong>{{ comment.author.name }}</strong>: {{ comment.content }}</p>
+      <p>
+        <strong>{{ comment.author.username }}</strong
+        >: {{ comment.content }}
+      </p>
     </div>
 
-    <form @submit.prevent="addComment">
+    <form @submit.prevent="submitComment">
       <input v-model="newComment" placeholder="Add a comment..." />
       <button type="submit">Send</button>
     </form>
@@ -12,23 +15,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import type { Comment } from '@/types'
+import { onMounted, computed, ref } from 'vue'
+import { useCommentStore } from '@/stores/commentStore'
 
 const props = defineProps<{ postId: number }>()
-const comments = ref<Comment[]>([])
+const commentStore = useCommentStore()
 const newComment = ref('')
 
-onMounted(async () => {
-  comments.value = await fetch(`/api/posts/${props.postId}/comments`).then(res => res.json())
+onMounted(() => {
+  commentStore.loadComments(props.postId)
 })
 
-const addComment = async () => {
-  const comment = await fetch(`/api/posts/${props.postId}/comments`, {
-    method: 'POST',
-    body: JSON.stringify({ content: newComment.value }),
-  }).then(res => res.json())
-  comments.value.push(comment)
+const comments = computed(() => commentStore.getComments(props.postId))
+
+const submitComment = async () => {
+  if (!newComment.value.trim()) return
+  await commentStore.addComment(props.postId, newComment.value)
   newComment.value = ''
 }
 </script>

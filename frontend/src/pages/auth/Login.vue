@@ -2,7 +2,8 @@
   <h2>login</h2>
   <form @submit.prevent="handleLogin">
     <div>
-    <input v-model="email" type="email" placeholder="Email" required /></div>
+      <input v-model="email" type="email" placeholder="Email" required />
+    </div>
     <input v-model="password" type="password" placeholder="Password" required />
     <button type="submit">Login</button>
   </form>
@@ -10,7 +11,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/user'
+import { useAuthStore } from '@/stores/authStore'
 import { useRouter } from 'vue-router'
 // import { validate } from 'graphql'
 
@@ -18,10 +19,10 @@ import { useForm } from '@/composables/useForm'
 
 const email = ref('')
 const password = ref('')
-const userStore = useUserStore()
+const userStore = useAuthStore()
 const router = useRouter()
 
-const { fields, errors, validate } = useForm({ email: '', password: '' })
+const { fields, errors, validate } = useForm({ email: email, password: password })
 
 const rules = {
   email: (v: string) => (!v.includes('@') ? 'Invalid email' : null),
@@ -29,7 +30,8 @@ const rules = {
 }
 
 const handleLogin = async () => {
-    if (!validate(rules)) return
+  if (!validate(rules)) return
+
   await userStore.login(fields.value.email, fields.value.password)
   const success = await userStore.login(email.value, password.value)
   if (success) router.push('/')

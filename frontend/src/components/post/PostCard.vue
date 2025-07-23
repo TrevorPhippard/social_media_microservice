@@ -1,7 +1,7 @@
 <!-- src/components/post/PostCard.vue -->
 <template>
   <div class="post-card">
-    <h2>{{ post.author.name }}</h2>
+    <h2>{{ post.author.username }}</h2>
     <p>{{ post.content }}</p>
     <small>{{ post.createdAt }}</small>
   </div>
@@ -11,11 +11,23 @@
 defineProps<{
   post: {
     id: number
-    content: string
-    createdAt: string
     author: {
-      name: string
+      id: number
+      username: string
+      email: string
+      avatarUrl?: string
+      bio?: string
+      createdAt: string
+      updatedAt: string
+      token: string
+      refreshToken?: string
     }
+    content: string
+    imageUrl?: string
+    createdAt: string
+    updatedAt: string
+    likesCount: number
+    commentsCount: number
   }
 }>()
 </script>

@@ -1,4 +1,8 @@
 export class ApiClient {
+  /**
+   * ApiClient Wraps calls with a request header
+   */
+
   private baseUrl: string
   private getToken: () => string | null
 
@@ -54,31 +58,6 @@ export class ApiClient {
     } catch (err) {
       if (retries <= 0) throw err
       return this.withRetry(fn, retries - 1)
-    }
-  }
-
-  private async requestWithRetry<T>(path: string, options: RequestInit, retries = 1): Promise<T> {
-    try {
-      return await this.request<T>(path, options)
-    } catch (err: any) {
-      if (retries > 0 && err.message.includes('401')) {
-        const refreshToken = localStorage.getItem('refresh_token')
-        if (!refreshToken) throw err
-
-        // try to refresh token
-        const res = await fetch(`${this.baseUrl}/api/auth/refresh`, {
-          method: 'POST',
-          body: JSON.stringify({ refresh_token: refreshToken }),
-          headers: { 'Content-Type': 'application/json' },
-        })
-
-        if (res.ok) {
-          const json = await res.json()
-          localStorage.setItem('token', json.token)
-          return this.requestWithRetry(path, options, retries - 1)
-        }
-      }
-      throw err
     }
   }
 }

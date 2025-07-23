@@ -7,16 +7,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import CommentSection from '@/components/post/CommentSection.vue'
-import type { Post } from '@/types'
+import { usePostStore } from '@/stores/postStore'
 
 const route = useRoute()
 const postId = Number(route.params.id)
-const post = ref<Post | null>(null)
+const postStore = usePostStore()
 
-onMounted(async () => {
-  post.value = await fetch(`/api/posts/${postId}`).then(res => res.json())
+onMounted(() => {
+  postStore.getPost(postId)
 })
+
+const post = computed(() => postStore.getPost(postId))
 </script>

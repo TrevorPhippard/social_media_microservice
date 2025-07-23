@@ -7,11 +7,21 @@
       <ul class="nav-links" v-if="isAuthenticated">
         <li><RouterLink to="/">Home</RouterLink></li>
         <li><RouterLink to="/explore">Explore</RouterLink></li>
-        <li><RouterLink to="/notifications">Notifications<span v-if="unreadCount" class="badge">{{ unreadCount }}</span></RouterLink></li>
+        <li>
+          <RouterLink to="/notifications"
+            >Notifications<span v-if="unreadCount" class="badge">{{
+              unreadCount
+            }}</span></RouterLink
+          >
+        </li>
         <li><RouterLink :to="`/profile/${user?.id}`">Profile</RouterLink></li>
         <li><button @click="logout" class="btn-logout">Logout</button></li>
         <li>
-          <button @click="toggleTheme" class="btn-theme" :aria-label="`Switch to ${themeStore.darkMode ? 'light' : 'dark'} mode`">
+          <button
+            @click="toggleTheme"
+            class="btn-theme"
+            :aria-label="`Switch to ${themeStore.darkMode ? 'light' : 'dark'} mode`"
+          >
             <span v-if="themeStore.darkMode">🌞</span>
             <span v-else>🌙</span>
           </button>
@@ -28,17 +38,19 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useUserStore } from '@/stores/user'
+import { useAuthStore } from '@/stores/authStore'
 import { useNotificationStore } from '@/stores/notifications'
 import { useThemeStore } from '@/stores/theme'
 
-const userStore = useUserStore()
+const userStore = useAuthStore()
 const notificationStore = useNotificationStore()
 const themeStore = useThemeStore()
 
 const user = computed(() => userStore.user)
 const isAuthenticated = computed(() => userStore.isAuthenticated)
-const unreadCount = computed(() => notificationStore.notifications.filter(n => !n.read).length)
+// eslint-disable-next-line
+const unreadCount = computed(() => notificationStore.notifications.length)
+//.filter((n) => !n.read).length)
 
 const logout = () => {
   userStore.logout()

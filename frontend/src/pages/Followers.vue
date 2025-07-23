@@ -10,15 +10,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import type { User } from '@/types'
+import { useUserStore } from '@/stores/userStore'
 
 const route = useRoute()
 const userId = Number(route.params.id)
-const followers = ref<User[]>([])
+const userStore = useUserStore()
 
-onMounted(async () => {
-  followers.value = await fetch(`/api/users/${userId}/followers`).then(res => res.json())
+onMounted(() => {
+  userStore.loadFollowers(userId)
 })
+
+const followers = computed(() => userStore.getFollowers(userId))
 </script>

@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia'
-import { usePostStore } from '@/stores/posts'
+import { usePostStore } from '@/stores/postStore'
 
 export const usePosts = () => {
   const store = usePostStore()

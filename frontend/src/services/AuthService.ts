@@ -2,7 +2,11 @@ import type { User, LoginPayload, RegisterPayload } from '@/types'
 import type { ApiClient } from './ApiClient'
 
 export class AuthService {
-  constructor(private api: ApiClient) {}
+  private api: ApiClient
+
+  constructor(apiClient: ApiClient) {
+    this.api = apiClient
+  }
 
   async login(payload: LoginPayload): Promise<User> {
     const response = await this.api.post<User>('/api/auth/login', payload)

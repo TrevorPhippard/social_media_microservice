@@ -7,6 +7,7 @@ function generateRandomPost(id: number): any {
 
   return {
     id,
+
     author: {
       id: id,
       username: `user_${randomString()}`,
@@ -17,6 +18,7 @@ function generateRandomPost(id: number): any {
       updatedAt: timestamp(),
       token: randomString() + randomString(),
     },
+
     content: `Post content ${randomString()}`,
     imageUrl: `https://picsum.photos/seed/${randomString()}/600/400`,
     createdAt: timestamp(),
@@ -25,6 +27,7 @@ function generateRandomPost(id: number): any {
     commentsCount: Math.floor(Math.random() * 50),
   }
 }
+
 const mockPosts = Array.from({ length: 5 }, (_, i) => generateRandomPost(i + 1))
 
 export class PostService {
@@ -32,6 +35,12 @@ export class PostService {
 
   constructor(apiClient: ApiClient) {
     this.api = apiClient
+  }
+
+  async getPostById(postId: number): Promise<Post> {
+    const res = await fetch(`/api/posts/${postId}`)
+    if (!res.ok) throw new Error('Failed to fetch post')
+    return await res.json()
   }
 
   fetchPosts(): Promise<Post[]> {

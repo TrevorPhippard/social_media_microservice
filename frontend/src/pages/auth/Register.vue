@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/stores/authStore'
 import { useRouter } from 'vue-router'
 
 const name = ref('')
@@ -20,7 +20,11 @@ const authStore = useAuthStore()
 const router = useRouter()
 
 const register = async () => {
-  const success = await authStore.register({ username: name.value, email: email.value, password: password.value })
+  const success = await authStore.register({
+    username: name.value,
+    email: email.value,
+    password: password.value,
+  })
   if (success) router.push('/')
 }
 </script>
