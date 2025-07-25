@@ -1,4 +1,6 @@
 services:
+
+
   auth-db:
     image: postgres:15
     container_name: auth-db
@@ -44,6 +46,26 @@ services:
     ports:
       - "6379:6379"
 
+
+  # ----------------------------------------------------------------
+  # Tools
+  # ----------------------------------------------------------------
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: my-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "8080:80" # Map host port 8080 to container port 80
+    depends_on: [auth-db, profile-db]
+    networks: [app-network]
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro  # pre-load servers
+      - pgadmin_data:/var/lib/pgadmin
+
+
   # ----------------------------------------------------------------
   # Services
   # ----------------------------------------------------------------
@@ -69,19 +91,6 @@ services:
     ports:
       - "4002:4002"
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: my-pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: adminpassword
-    ports:
-      - "8080:80" # Map host port 8080 to container port 80
-    depends_on: [auth-db, profile-db]
-    networks: [app-network]
-    volumes:
-      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro  # pre-load servers
-      - pgadmin_data:/var/lib/pgadmin
 
   post:
     build: ./services/post

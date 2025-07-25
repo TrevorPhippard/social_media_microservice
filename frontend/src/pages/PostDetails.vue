@@ -2,14 +2,14 @@
   <div v-if="post">
     <h2>{{ post.author.username }}</h2>
     <p>{{ post.content }}</p>
-    <CommentSection :post-id="post.id" />
+    <!-- <CommentSection :post-id="post.id" /> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import CommentSection from '@/components/post/CommentSection.vue'
+// import CommentSection from '@/components/post/CommentSection.vue'
 import { usePostStore } from '@/stores/postStore'
 
 const route = useRoute()

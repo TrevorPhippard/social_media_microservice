@@ -59,8 +59,10 @@ export async function authenticateUser(
 
   if (!user) return null;
 
-  console.log(password, user.password);
   const passwordMatch = await bcrypt.compare(password, user.password);
+  console.log(password, user.password);
+  console.log(passwordMatch, "passwordMatch!");
+
   if (!passwordMatch) return null;
 
   const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" });

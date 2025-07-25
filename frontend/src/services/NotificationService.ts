@@ -1,6 +1,25 @@
 import { ApiClient } from './ApiClient'
 import type { Notification } from '@/types'
 
+const NotificationStub: Notification[] = [
+  {
+    id: 1,
+    userId: 1,
+    type: 'like', // ✅ must be one of 'like' | 'comment' | 'follow' | 'mention'
+    message: 'John liked your post.',
+    isRead: false,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 1,
+    userId: 1,
+    type: 'like', // ✅ must be one of 'like' | 'comment' | 'follow' | 'mention'
+    message: 'Mike comment on your post.',
+    isRead: false,
+    createdAt: new Date().toISOString(),
+  },
+]
+
 export class NotificationService {
   private api: ApiClient
 
@@ -10,7 +29,9 @@ export class NotificationService {
 
   // Fetch notifications for current user
   fetchNotifications(): Promise<Notification[]> {
-    return this.api.get<Notification[]>('/api/notifications')
+    return Promise.resolve(NotificationStub)
+
+    //this.api.get<Notification[]>('/api/notifications')
   }
 
   // Mark a notification as read

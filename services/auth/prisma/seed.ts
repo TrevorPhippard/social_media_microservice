@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
+
 const prisma = new PrismaClient({
   log: ["query", "error"],
 });
@@ -8,13 +10,14 @@ async function main() {
 
   // Check if profile exists
   const existing = await prisma.user.findFirst({ where: { username } });
+  const hashedPassword = await bcrypt.hash("test", 10); // salt rounds = 10
 
   if (!existing) {
     await prisma.user.create({
       data: {
         username: username,
         email: "test@test.com",
-        password: "hashed_password",
+        password: hashedPassword,
       },
     });
     console.log("Created auth:");

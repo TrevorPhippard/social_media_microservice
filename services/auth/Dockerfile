@@ -26,4 +26,4 @@ RUN npm run build
 EXPOSE 4003
 
 # Push Prisma schema to database and start the built app
-CMD ["sh", "-c", "npx prisma db push && npm run seed && npm run start"]
+CMD ["sh", "-c", "npx prisma db push && echo 'Pushed schema' && npm run seed && echo 'Seed ran' && npm run start"]
