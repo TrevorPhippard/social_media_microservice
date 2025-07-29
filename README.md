@@ -1,6 +1,10 @@
-
-
-![Alt text]([https://example.com/path/to/image.png](https://github.com/TrevorPhippard/Carpenter-Kitty-Microservice/blob/main/frontend/src/assets/ck-logo.jpg))
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="frontend/src/assets/ck-logo.jpg">
+  <source media="(prefers-color-scheme: dark)" srcset="frontend/src/assets/ck-logo.jpg">
+  <img src="frontend/src/assets/ck-logo.jpg" alt="ck Logo" width="50%"> 
+</picture>
+</p>
 
 
 # Carpenter Kitty App
