@@ -2,7 +2,7 @@
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="frontend/src/assets/ck-logo.jpg">
   <source media="(prefers-color-scheme: dark)" srcset="frontend/src/assets/ck-logo.jpg">
-  <img src="frontend/src/assets/ck-logo.jpg" alt="ck Logo" width="50%"> 
+  <img src="frontend/src/assets/ck-logo.jpg" alt="ck Logo" width="20%"> 
 </picture>
 </p>
 
