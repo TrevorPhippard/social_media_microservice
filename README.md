@@ -1,4 +1,9 @@
-# Social Media Microservices App
+
+
+![Alt text]([https://example.com/path/to/image.png](https://github.com/TrevorPhippard/Carpenter-Kitty-Microservice/blob/main/frontend/src/assets/ck-logo.jpg))
+
+
+# Carpenter Kitty App
 An app that connects users with local contractors for renos. Users can post a projects, share projects done, view contractor profiles and add reviews, and hire someone to complete the job. Think task rabbit but for home reno projects.
 
 ---
