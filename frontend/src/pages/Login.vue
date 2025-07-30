@@ -22,10 +22,13 @@ async function handleLogin(form: { email: string; password: string }) {
 </script>
 
 <template>
-  <div class="max-w-md mx-auto p-6 shadow rounded bg-white">
+  <div class="max-w-md mx-auto p-6 ">
     <h2 class="text-xl font-bold mb-4">Login</h2>
     <LoginForm @submit="handleLogin" />
     <p v-if="error" class="text-red-500">{{ error }}</p>
     <p v-if="isAuthenticated">Welcome {{ user?.username }}</p>
   </div>
+  <RouterLink to="/register" class="block px-4 py-2 text-gray-600 hover:text-gray-900">
+    Sign Up!
+  </RouterLink>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+    <AppLayout>
     <h2>Notifications</h2>
     <p>{{ notificationStore.notifications.length }}</p>
     <ul>
@@ -7,13 +7,14 @@
         {{ n.message }}
       </li>
     </ul>
-  </div>
+  </AppLayout>
 </template>
 
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useNotificationStore } from '@/stores/notifications'
+  import AppLayout from '@/layouts/AppLayout.vue';
+  import { onMounted } from 'vue'
+  import { useNotificationStore } from '@/stores/notifications'
 
 const notificationStore = useNotificationStore()
 

@@ -48,7 +48,8 @@ const navigableRoutes = router.getRoutes().filter(route => {
     route.path !== '/:pathMatch(.*)*' &&  // exclude catch-all 404
     route.meta?.nav !== false &&          // allow opt-out via route meta
     route.path !== '/' &&                 // optionally exclude home if you want
-    route.path !== '/profile'
+    route.path !== '/profile' &&
+    route.path !== '/auth'
   )
 })
 

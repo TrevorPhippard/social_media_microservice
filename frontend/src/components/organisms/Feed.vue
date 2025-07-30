@@ -1,13 +1,11 @@
 <template>
-  <section class="max-w-xl mx-auto">
-    <p>testestestes</p>
+  <section class="max-w-xl mx-auto ">
     <PostCard
       v-for="post in posts"
       :key="post.id"
       :post="post"
       @share="handleShare"
     />
-
     <div
       v-if="isLoading"
       class="flex justify-center py-6 text-gray-500"
@@ -24,6 +22,7 @@
     </button>
   </section>
 </template>
+
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'

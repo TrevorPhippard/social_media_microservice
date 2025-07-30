@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="handleSubmit" class="flex items-start space-x-3">
-    <BaseAvatar :src="userAvatar" :alt="userName" size="sm" />
+    <!-- <BaseAvatar :src="userAvatar" :alt="userName" size="sm" /> -->
 
     <div class="flex-1">
       <textarea
@@ -27,12 +27,6 @@
 
 <script setup lang="ts">
 import { ref, watch, nextTick } from 'vue'
-import BaseAvatar from '@/components/atoms/BaseAvatar.vue'
-
-const props = defineProps<{
-  userAvatar?: string
-  userName?: string
-}>
 
 const emits = defineEmits<{
   (e: 'submit', comment: string): void
@@ -40,7 +34,6 @@ const emits = defineEmits<{
 
 const commentText = ref('')
 const isSubmitting = ref(false)
-const textareaRef = ref<HTMLTextAreaElement>()
 
 function autoResize(event: Event) {
   const el = event.target as HTMLTextAreaElement

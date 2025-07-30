@@ -19,6 +19,7 @@
             Settings
           </RouterLink>
         </li>
+
         <li>
           <button
             @click="$emit('logout')"

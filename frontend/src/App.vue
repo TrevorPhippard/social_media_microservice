@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import Navbar from './layouts/Navbar.vue'
 </script>
 
 <template>
-  <header>
-      <Navbar />
-
-  </header>
-  <RouterView />
+  <main class="flex-1 p-4 bg-gray-50 overflow-auto">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
@@ -16,6 +13,7 @@ html.dark {
   background: #121212;
   color: #f0f0f0;
 }
+
 
 header {
   line-height: 1.5;

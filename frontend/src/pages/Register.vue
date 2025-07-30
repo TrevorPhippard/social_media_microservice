@@ -17,10 +17,13 @@ async function handleRegister(form: { name: string; email: string; password: str
 </script>
 
 <template>
-  <div class="max-w-md mx-auto p-6 shadow rounded bg-white">
+  <div class="max-w-md mx-auto">
     <h2 class="text-xl font-bold mb-4">Register</h2>
     <RegistrationForm @submit="handleRegister" />
     <p v-if="error" class="text-red-500">{{ error }}</p>
     <p v-if="isAuthenticated">Welcome {{ user?.username }}</p>
   </div>
+    <RouterLink to="/login" class="block px-4 py-2 text-gray-600 hover:text-gray-900">
+      Back to Sign In
+  </RouterLink>
 </template>

@@ -1,7 +1,7 @@
 <template>
 <div  class="relative inline-block">
   <div
-    class="rounded-full bg-gray-200 overflow-hidden flex items-center justify-center text-sm font-medium text-white "
+    class="w-10 rounded-full bg-gray-200 overflow-hidden flex items-center justify-center text-sm font-medium text-white "
   >
     <img
       v-if="src"
