@@ -4,7 +4,7 @@
         <div class="flex-1 flex flex-col p-2">
           <Navbar/>
           <br/>
-          <slot />
+            <RouterView />
         </div>
       </div>
 </template>

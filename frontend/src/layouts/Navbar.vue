@@ -2,7 +2,7 @@
   <nav class="bg-white shadow px-4 py-2 flex items-center justify-between">
 
     <div class="flex items-center space-x-4">
-        <img src="@/assets/logo.svg" alt="Logo" class="h-5 " />
+        <img src="@/assets/ck-logo.jpg" alt="Logo" class="h-15 mr-10" />
         <BaseInput
           v-model="search"
           placeholder="Search For Friends"
@@ -26,7 +26,11 @@
 
   </nav>
 </template>
-
+<style>
+.mr-10{
+ margin-right: 10px;
+}
+</style>
 
 <script setup lang="ts">
 import { ref } from 'vue'

@@ -1,5 +1,5 @@
 <template>
-    <AppLayout>
+  <section class="w-3xl p-6 mx-auto bg-white rounded shadow">
     <h2>Notifications</h2>
     <p>{{ notificationStore.notifications.length }}</p>
     <ul>
@@ -7,12 +7,11 @@
         {{ n.message }}
       </li>
     </ul>
-  </AppLayout>
+    </section>
 </template>
 
 
 <script setup lang="ts">
-  import AppLayout from '@/layouts/AppLayout.vue';
   import { onMounted } from 'vue'
   import { useNotificationStore } from '@/stores/notifications'
 

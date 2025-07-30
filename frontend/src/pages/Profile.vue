@@ -1,6 +1,5 @@
 <template>
-    <AppLayout>
-    <section class="max-w-3xl p-6  mx-auto bg-white rounded shadow ">
+    <section class="w-3xl p-6 mx-auto bg-white rounded shadow ">
       <header class="flex items-center space-x-4 mb-6">
         <BaseAvatar :src="user.avatar" :alt="user.name" size="lg" />
         <div>
@@ -23,7 +22,6 @@
         />
       </section>
     </section>
-  </AppLayout>
 </template>
 <style>
 
@@ -31,7 +29,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-    import AppLayout from '@/layouts/AppLayout.vue';
 
 import BaseAvatar from '@/components/atoms/BaseAvatar.vue'
 import PostCard from '@/components/molecules/PostCard.vue'

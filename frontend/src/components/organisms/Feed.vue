@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-xl mx-auto ">
+  <section class="w-xl mx-auto ">
     <PostCard
       v-for="post in posts"
       :key="post.id"
