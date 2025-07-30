@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import { onMounted } from 'vue'
-  import { useNotificationStore } from '@/stores/notifications'
+import { useNotificationStore } from '@/stores/notificationsStore'
 
 const notificationStore = useNotificationStore()
 

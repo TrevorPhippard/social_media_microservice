@@ -1,14 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // Lazy-loaded views for better performance
 
-var Feed = () => import('@/pages/Feed.vue')
-var Home = () => import('@/pages/Home.vue')
-var Login = () => import('@/pages/Login.vue')
+var Feed = () => import('@/pages/FeedPage.vue')
+var Home = () => import('@/pages/HomePage.vue')
+var Login = () => import('@/pages/LoginPage.vue')
 var NotFound = () => import('@/pages/NotFound.vue')
-var Notifications = () => import('@/pages/Notifications.vue')
-var Profile = () => import('@/pages/Profile.vue')
-var Register = () => import('@/pages/Register.vue')
-var Settings = () => import('@/pages/Settings.vue')
+var Notifications = () => import('@/pages/NotificationsPage.vue')
+var Profile = () => import('@/pages/ProfilePage.vue')
+var Register = () => import('@/pages/RegisterPage.vue')
+var Settings = () => import('@/pages/SettingsPage.vue')
+var dashboard = () => import('@/pages/DashboardPage.vue')
 var AuthLayout = ()=> import('@/layouts/AuthLayout.vue')
 var AppLayout = ()=> import('@/layouts/AppLayout.vue')
 
@@ -26,13 +27,14 @@ const routes = [
         { path: '/profile/:id', name: 'Profile', component: Profile, props: true },
         { path: '/profile', component: Profile },
         { path: '/Feed', name: 'Feed', component: Feed },
+        // { path: '/dashboard', name: 'Dashboard', component: dashboard },
         { path: '/notifications', name: 'Notifications', component: Notifications },
-        { path:'/Settings', name: 'Settings', component: Settings},
+        { path: '/Settings', name: 'Settings', component: Settings },
+        { path: '/', name: 'Home', component: Home },
       ]
     },
 
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
-  { path: '/', name: 'Home', component: Home },
 ]
 
 

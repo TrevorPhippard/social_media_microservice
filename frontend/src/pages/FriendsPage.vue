@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import Followers from "@/components/organisms/Followers.vue";
+  import Followers from "@/components/organisms/Followers.vue";
   import Following from '@/components/organisms/Following.vue';
-
 </script>

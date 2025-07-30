@@ -23,7 +23,9 @@ async function handleLogin(form: { email: string; password: string }) {
 
 <template>
   <div class="max-w-md mx-auto p-6 ">
-    <h2 class="text-xl font-bold mb-4">Login</h2>
+            <img src="@/assets/ck-logo.jpg" alt="Logo" class="h-15 mx-auto" />
+
+    <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
     <LoginForm @submit="handleLogin" />
     <p v-if="error" class="text-red-500">{{ error }}</p>
     <p v-if="isAuthenticated">Welcome {{ user?.username }}</p>

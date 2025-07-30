@@ -1,7 +1,7 @@
 // src/stores/dashboardStore.ts
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { DashboardService, Stats } from '@/services/DashboardService'
+import { DashboardService, type Stats } from '@/services/DashboardService'
 
 export const useDashboardStore = defineStore('dashboard', () => {
   const stats = ref<Stats>({

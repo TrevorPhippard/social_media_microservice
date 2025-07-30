@@ -18,7 +18,8 @@ async function handleRegister(form: { name: string; email: string; password: str
 
 <template>
   <div class="max-w-md mx-auto">
-    <h2 class="text-xl font-bold mb-4">Register</h2>
+    <img src="@/assets/ck-logo.jpg" alt="Logo" class="h-15 mx-auto" />
+    <h2 class="text-xl font-bold mb-4 text-center">Register</h2>
     <RegistrationForm @submit="handleRegister" />
     <p v-if="error" class="text-red-500">{{ error }}</p>
     <p v-if="isAuthenticated">Welcome {{ user?.username }}</p>
