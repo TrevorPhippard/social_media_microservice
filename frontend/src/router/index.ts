@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/authStore'
 import { createRouter, createWebHistory } from 'vue-router'
 // Lazy-loaded views for better performance
 
@@ -14,8 +15,6 @@ var AuthLayout = ()=> import('@/layouts/AuthLayout.vue')
 var AppLayout = ()=> import('@/layouts/AppLayout.vue')
 
 const routes = [
-
-
     { path: '/auth', component: AuthLayout,
       children: [
         { path: '/login',  name:'Log In', component: Login },
@@ -24,13 +23,40 @@ const routes = [
   },
     { path: '/', component: AppLayout,
       children: [
-        { path: '/profile/:id', name: 'Profile', component: Profile, props: true },
-        { path: '/profile', component: Profile },
-        { path: '/Feed', name: 'Feed', component: Feed },
-        // { path: '/dashboard', name: 'Dashboard', component: dashboard },
-        { path: '/notifications', name: 'Notifications', component: Notifications },
-        { path: '/Settings', name: 'Settings', component: Settings },
-        { path: '/', name: 'Home', component: Home },
+        {
+          path: '/profile/:id',
+          name: 'Profile',
+          component: Profile,
+          props: true,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: '/profile',
+          component: Profile,
+          meta: { requiresAuth: true }
+        },
+        { path: '/Feed',
+          name: 'Feed',
+          component: Feed,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        { path: '/notifications',
+          name: 'Notifications',
+          component: Notifications,
+          meta: { requiresAuth: true }
+        },
+        { path: '/Settings',
+          name: 'Settings',
+          component: Settings,
+          meta: { requiresAuth: true }
+        },
+        { path: '/',
+          name: 'Home',
+          component: Home,
+          meta: { requiresAuth: true }
+        },
       ]
     },
 
@@ -44,5 +70,15 @@ export const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
+router.beforeEach((to, from, next) => {
+  const auth = useAuthStore();
+
+  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+    next({ name: 'Login' }); // redirect to login
+  } else {
+    next(); // allow access
+  }
+});
 
 export default router
