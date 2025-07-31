@@ -1,0 +1,62 @@
+project code should start with CKMS
+
+
+USER ACTIONS
+------------------------
+login, register
+Deactivate or delete account
+
+posts
+------------
+Creating post
+Deleting post
+Reporting post
+Sharing post
+Add, like and respond to a comment
+Upload photos or videos
+Tag others in posts or comments
+
+notification
+------------
+Notification options
+Enabling notification
+Muting notifications
+
+profile
+------------
+view profile
+Edit profile information (bio, profile picture, cover photo)
+Community, activity & messages,
+Reviewing activity,View activity logs
+
+Search
+---------------------
+Explore trending topics or hashtags
+Search for other users, pages, or groups
+
+Messages
+---------------------
+Chat details
+Group chat
+Create a group
+Leaving group chat
+Joining group
+Leaving group
+Block conversation
+
+Friends
+---------------------
+Followers & following
+Adding friends
+Accepting friend request
+Remove friend request
+Blocking user
+
+etc
+---------------------
+About & Legal
+Awards, challenges
+Leaderboard
+Scheduling
+Rate the app
+Social feed

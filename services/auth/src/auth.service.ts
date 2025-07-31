@@ -60,8 +60,6 @@ export async function authenticateUser(
   if (!user) return null;
 
   const passwordMatch = await bcrypt.compare(password, user.password);
-  console.log(password, user.password);
-  console.log(passwordMatch, "passwordMatch!");
 
   if (!passwordMatch) return null;
 

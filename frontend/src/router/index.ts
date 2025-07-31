@@ -1,45 +1,84 @@
+import { useAuthStore } from '@/stores/authStore'
 import { createRouter, createWebHistory } from 'vue-router'
 // Lazy-loaded views for better performance
 
-var Feed = () => import('@/pages/Feed.vue')
-var Followers = () => import('@/pages/Followers.vue')
-var Following = () => import('@/pages/Following.vue')
-var Friends = () => import('@/pages/Friends.vue')
-var Home = () => import('@/pages/Home.vue')
-var Login = () => import('@/pages/Login.vue')
-var Marketplace = () => import('@/pages/Marketplace.vue')
+var Feed = () => import('@/pages/FeedPage.vue')
+var Home = () => import('@/pages/HomePage.vue')
+var Login = () => import('@/pages/LoginPage.vue')
 var NotFound = () => import('@/pages/NotFound.vue')
-var Notifications = () => import('@/pages/Notifications.vue')
-var PostDetails = () => import('@/pages/PostDetails.vue')
-var Profile = () => import('@/pages/Profile.vue')
-var Register = () => import('@/pages/Register.vue')
-var Settings = () => import('@/pages/Settings.vue')
+var Notifications = () => import('@/pages/NotificationsPage.vue')
+var Profile = () => import('@/pages/ProfilePage.vue')
+var Register = () => import('@/pages/RegisterPage.vue')
+var Settings = () => import('@/pages/SettingsPage.vue')
+var dashboard = () => import('@/pages/DashboardPage.vue')
+var AuthLayout = ()=> import('@/layouts/AuthLayout.vue')
+var AppLayout = ()=> import('@/layouts/AppLayout.vue')
 
 const routes = [
+    { path: '/auth', component: AuthLayout,
+      children: [
+        { path: '/login',  name:'Log In', component: Login },
+        { path: '/register', name:'Register',  component: Register },
+      ]
+  },
+    { path: '/', component: AppLayout,
+      children: [
+        {
+          path: '/profile/:id',
+          name: 'Profile',
+          component: Profile,
+          props: true,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: '/profile',
+          component: Profile,
+          meta: { requiresAuth: true }
+        },
+        { path: '/Feed',
+          name: 'Feed',
+          component: Feed,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        { path: '/notifications',
+          name: 'Notifications',
+          component: Notifications,
+          meta: { requiresAuth: true }
+        },
+        { path: '/Settings',
+          name: 'Settings',
+          component: Settings,
+          meta: { requiresAuth: true }
+        },
+        { path: '/',
+          name: 'Home',
+          component: Home,
+          meta: { requiresAuth: true }
+        },
+      ]
+    },
 
-  { path: '/login',  name:'Log In', component: Login },
-  { path: '/register', name:'Register',  component: Register },
-
-  { path: '/', name: 'Home', component: Home },
-  { path: '/friends', name: 'Friends', component: Friends },
-  { path: '/marketplace', name: 'Marketplace', component: Marketplace },
-  { path: '/notifications', name: 'Notifications', component: Notifications },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
-
-
-  { path:'/Feed', name: 'Feed', component: Feed},
-  { path:'/Followers', name: 'Followers', component: Followers},
-  { path:'/Following', name: 'Following', component: Following},
-  { path:'/PostDetails', name: 'PostDetails', component: PostDetails},
-  { path:'/Settings', name: 'Settings', component: Settings},
-
-  { path: '/profile/:id', name: 'Profile', component: Profile, props: true },
-  { path: '/profile', component: Profile },
 ]
+
+
+
 
 export const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
+router.beforeEach((to, from, next) => {
+  const auth = useAuthStore();
+
+  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+    next({ name: 'Login' }); // redirect to login
+  } else {
+    next(); // allow access
+  }
+});
 
 export default router
