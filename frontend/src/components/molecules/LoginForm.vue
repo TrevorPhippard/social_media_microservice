@@ -25,6 +25,7 @@ function handleSubmit() {
       class="w-full border p-2 rounded"
       type="email"
       placeholder="Email"
+      data-test="Email"
       required
     />
   </div>
@@ -37,12 +38,13 @@ function handleSubmit() {
       class="w-full border p-2 rounded"
       type="password"
       placeholder="Password"
+      data-test="Password"
       required
     />
   </div>
     <br/>
 
-  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+  <button type="submit" data-test="Login" class="bg-blue-600 text-white px-4 py-2 rounded">
     Login
   </button>
 </form>

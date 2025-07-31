@@ -8,7 +8,9 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "test:report": "npx playwright test && npx playwright show-report",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "format": "prettier --write src/"
