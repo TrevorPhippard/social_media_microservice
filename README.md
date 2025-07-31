@@ -102,7 +102,7 @@ social-media-app/
 └── frontend/            # Vue 3 SPA
 ```
 
-## Front-end Structure
+## 📁 Front-End Structure
 
 ```
 frontend/
