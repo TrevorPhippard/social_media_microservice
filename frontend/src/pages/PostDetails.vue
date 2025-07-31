@@ -1,7 +1,7 @@
 <template>
   <div v-if="post">
-    <h2>{{ post.author.username }}</h2>
-    <p>{{ post.content }}</p>
+    <h2>{{ post }}</h2>
+    <!-- <p>{{ post.content }}</p> -->
     <!-- <CommentSection :post-id="post.id" /> -->
   </div>
 </template>

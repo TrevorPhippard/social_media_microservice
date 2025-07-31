@@ -2,8 +2,8 @@
   <div>
     <h2>Followers</h2>
     <ul>
-      <li v-for="follower in followers" :key="follower.id">
-        {{ follower.username }}
+      <li v-for="user in followers" :key="user.id">
+        {{ user.username }}
       </li>
     </ul>
   </div>

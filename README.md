@@ -1,6 +1,14 @@
-# Social Media Microservices App
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="frontend/src/assets/ck-logo.jpg">
+  <source media="(prefers-color-scheme: dark)" srcset="frontend/src/assets/ck-logo.jpg">
+  <img src="frontend/src/assets/ck-logo.jpg" alt="ck Logo" width="20%"> 
+</picture>
+</p>
 
-A scalable, production-ready social media application built using Node.js microservices and a Vue.js frontend. It features a GraphQL API gateway, real-time messaging, full-text search, JWT authentication, and observability integrations via Prometheus and OpenTelemetry.
+
+# Carpenter Kitty App
+An app that connects users with local contractors for renos. Users can post a projects, share projects done, view contractor profiles and add reviews, and hire someone to complete the job. Think task rabbit but for home reno projects.
 
 ---
 
@@ -94,7 +102,7 @@ social-media-app/
 └── frontend/            # Vue 3 SPA
 ```
 
-## Front-end Structure
+## 📁 Front-End Structure
 
 ```
 frontend/

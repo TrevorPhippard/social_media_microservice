@@ -38,9 +38,11 @@ export class PostService {
   }
 
   async getPostById(postId: number): Promise<Post> {
-    const res = await fetch(`/api/posts/${postId}`)
-    if (!res.ok) throw new Error('Failed to fetch post')
-    return await res.json()
+    // const res = await fetch(`/api/posts/${postId}`)
+    // if (!res.ok) throw new Error('Failed to fetch post')
+    // return await res.json()
+
+    return Promise.resolve(mockPosts[0])
   }
 
   fetchPosts(): Promise<Post[]> {
